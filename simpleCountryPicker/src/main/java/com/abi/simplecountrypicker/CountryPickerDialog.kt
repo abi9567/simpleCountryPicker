@@ -50,41 +50,51 @@ import com.abi.simplecountrypicker.data.CountryData
 fun CountryPickerDialog(onDismiss : () -> Unit,
                         onItemClick : (CountryData) -> Unit,
                         countryList : List<CountryData>,
-                        dismissOnBackPress : Boolean = true,
-                        dismissOnClickOutside : Boolean = true) {
+                        dialogProperties: DialogProperties = DialogProperties()
+) {
 
     Dialog(onDismissRequest = onDismiss,
-        properties = DialogProperties(dismissOnBackPress = dismissOnBackPress,
-            dismissOnClickOutside = dismissOnClickOutside)
+        properties = dialogProperties
     ) {
+        CountryListView(onDismiss = onDismiss,
+            onItemClick =  onItemClick,
+            countryList = countryList)
+    }
+}
 
-        Column(modifier = Modifier
-            .padding(vertical = 24.dp)
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(size = 16.dp)
-            )
-            .fillMaxSize()) {
+@Composable
+private fun CountryListView(
+    onDismiss : () -> Unit,
+    onItemClick : (CountryData) -> Unit,
+    countryList : List<CountryData>) {
 
-            Row(modifier = Modifier
-                .padding(start = 16.dp)
-                .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically) {
-                Text(text = "Select Country", fontSize = 16.sp, fontWeight = W600)
-                Spacer(modifier = Modifier.weight(weight = 1F))
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Default.Close, contentDescription = null)
-                }
+    Column(modifier = Modifier
+        .padding(vertical = 24.dp)
+        .background(
+            color = Color.White,
+            shape = RoundedCornerShape(size = 16.dp)
+        )
+        .fillMaxSize())
+    {
+
+        Row(modifier = Modifier
+            .padding(start = 16.dp)
+            .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically) {
+            Text(text = "Select Country", fontSize = 16.sp, fontWeight = W600)
+            Spacer(modifier = Modifier.weight(weight = 1F))
+            IconButton(onClick = { onDismiss() }) {
+                Icon(imageVector = Icons.Default.Close, contentDescription = null)
             }
+        }
 
-            Spacer(modifier = Modifier.height(height = 8.dp))
+        Spacer(modifier = Modifier.height(height = 8.dp))
 
-            LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
-                items(countryList) { item ->
-                    CountryListSingleItemView(
-                        modifier = Modifier.clickable { onItemClick(item) },
-                        countryData = item)
-                }
+        LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
+            items(countryList) { item ->
+                CountryListSingleItemView(
+                    modifier = Modifier.clickable { onItemClick(item) },
+                    countryData = item)
             }
         }
     }
@@ -129,7 +139,7 @@ private fun CountryListSingleItemView(modifier: Modifier = Modifier,
 
                 withStyle(style = SpanStyle(fontSize = 14.sp,
                     fontWeight = W600)) {
-                    append(text = countryData.countryCode + "\t\t") }
+                    append(text = "(${ countryData.countryCode })  ") }
 
                 withStyle(style = SpanStyle(fontSize = 14.sp)) {
                     append(text = stringResource(id = countryData.countryName)) }
