@@ -26,6 +26,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,7 +50,8 @@ import com.abi.simplecountrypicker.data.CountryData
 @Composable
 fun CountryPickerDialog(onDismiss : () -> Unit,
                         onItemClick : (CountryData) -> Unit,
-                        countryList : List<CountryData>,
+                        countryList : List<CountryData>?,
+                        onSearch: (String) -> Unit,
                         dialogProperties: DialogProperties = DialogProperties()
 ) {
 
@@ -58,6 +60,7 @@ fun CountryPickerDialog(onDismiss : () -> Unit,
     ) {
         CountryListView(onDismiss = onDismiss,
             onItemClick =  onItemClick,
+            onSearch = onSearch,
             countryList = countryList)
     }
 }
@@ -65,8 +68,9 @@ fun CountryPickerDialog(onDismiss : () -> Unit,
 @Composable
 private fun CountryListView(
     onDismiss : () -> Unit,
+    onSearch : (String) -> Unit,
     onItemClick : (CountryData) -> Unit,
-    countryList : List<CountryData>) {
+    countryList : List<CountryData>?) {
 
     Column(modifier = Modifier
         .padding(vertical = 24.dp)
@@ -83,15 +87,21 @@ private fun CountryListView(
             verticalAlignment = Alignment.CenterVertically) {
             Text(text = "Select Country", fontSize = 16.sp, fontWeight = W600)
             Spacer(modifier = Modifier.weight(weight = 1F))
-            IconButton(onClick = { onDismiss() }) {
+            IconButton(onClick = onDismiss) {
                 Icon(imageVector = Icons.Default.Close, contentDescription = null)
             }
         }
 
         Spacer(modifier = Modifier.height(height = 8.dp))
 
+        CustomSearchTextField(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            onValueChange = onSearch
+
+        )
+
         LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
-            items(countryList) { item ->
+            items(countryList ?: emptyList()) { item ->
                 CountryListSingleItemView(
                     modifier = Modifier.clickable { onItemClick(item) },
                     countryData = item)

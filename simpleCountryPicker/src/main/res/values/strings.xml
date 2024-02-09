@@ -478,5 +478,9 @@
     <string name="zambia_hint" translatable="false">95 5123456</string>
     <string name="zimbabwe">Zimbabwe</string>
     <string name="zimbabwe_hint" translatable="false">71 234 5678</string>
+
+
+    <string name="search_country">Search Country</string>
+
 </resources>
 

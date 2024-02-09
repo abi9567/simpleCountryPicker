@@ -17,6 +17,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -26,8 +27,9 @@ fun SimpleCountryPicker(modifier : Modifier = Modifier,
 ) {
 
     val isCountryPickerDialogVisible = viewModel.isCountryPickerDialogVisible.value
-    val countryList = viewModel.countryList
+    val countryList = viewModel.countryList.observeAsState().value
     val selectedCountry = viewModel.selectedCountry.observeAsState().value
+    val context = LocalContext.current
 
     if (isCountryPickerDialogVisible) {
         CountryPickerDialog(
@@ -35,9 +37,13 @@ fun SimpleCountryPicker(modifier : Modifier = Modifier,
             onItemClick = { country ->
                 viewModel.setSelectedCountry(item = country)
                 viewModel.setCountryPickerDialogVisibility()
+                viewModel.resetCountry()
             },
+            onSearch = {
+                viewModel.searchCountry(searchQuery = it, context = context)},
             onDismiss = {
                 viewModel.setCountryPickerDialogVisibility()
+                viewModel.resetCountry()
         })
     }
 

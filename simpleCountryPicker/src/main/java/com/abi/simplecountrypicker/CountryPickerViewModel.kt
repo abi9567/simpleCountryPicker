@@ -1,5 +1,6 @@
 package com.abi.simplecountrypicker
 
+import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
@@ -10,13 +11,16 @@ import com.abi.simplecountrypicker.utils.Utils
 
 class CountryPickerViewModel : ViewModel() {
 
-    private val _isCountryPickerDialogVisible = mutableStateOf(value = false)
+    private val _isCountryPickerDialogVisible = mutableStateOf(value = true)
     val isCountryPickerDialogVisible : State<Boolean> = _isCountryPickerDialogVisible
 
-    val countryList = Utils.countryList
+    private val fullCountryList = Utils.countryList
 
-    private val _selectedCountry = MutableLiveData(countryList[0])
-    val selectedCountry : LiveData<CountryData> = _selectedCountry
+    private val _countryList = MutableLiveData(fullCountryList)
+    val countryList : LiveData<List<CountryData>> = _countryList
+
+    private val _selectedCountry = MutableLiveData(countryList.value?.get(0))
+    val selectedCountry : LiveData<CountryData?> = _selectedCountry
 
 
     fun setCountryPickerDialogVisibility() {
@@ -27,5 +31,19 @@ class CountryPickerViewModel : ViewModel() {
         _selectedCountry.value = item
     }
 
+    fun resetCountry() {
+        _countryList.value = fullCountryList
+    }
+
+    fun searchCountry(searchQuery : String, context : Context) {
+        val tempList = mutableListOf<CountryData>()
+        fullCountryList.forEach {
+            val countryName = context.getString(it.countryName)
+            if (countryName.contains(other = searchQuery, ignoreCase = true)) {
+                tempList.add(element = it)
+            }
+        }
+        _countryList.value = tempList
+    }
 
 }
