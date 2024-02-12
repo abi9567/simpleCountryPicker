@@ -6,7 +6,6 @@ import com.abi.simplecountrypicker.data.CountryData
 object Utils {
     var countryList : List<CountryData> = mutableListOf(
         CountryData("ad", "+376", R.drawable.ad, R.string.andora),
-        CountryData("ae", "+971", R.drawable.ae, R.string.united_arab_emirates),
         CountryData("af", "+93", R.drawable.af, R.string.afghanistan),
         CountryData("ag", "+1", R.drawable.ag, R.string.antigua_and_barbuda),
         CountryData("ai", "+1", R.drawable.ai, R.string.anguilla),
@@ -228,6 +227,7 @@ object Utils {
         CountryData("tz", "+255", R.drawable.tz, R.string.tazmania),
         CountryData("ua", "+380", R.drawable.ua, R.string.ukraina),
         CountryData("ug", "+256", R.drawable.ug, R.string.uganda),
+        CountryData("ae", "+971", R.drawable.ae, R.string.united_arab_emirates),
         CountryData("us", "+1", R.drawable.us, R.string.united_states_america),
         CountryData("uy", "+598", R.drawable.uy, R.string.uruguay),
         CountryData("uz", "+998", R.drawable.uz, R.string.uzbekistan),
