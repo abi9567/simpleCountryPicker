@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,19 +32,23 @@ fun SimpleCountryPicker(modifier : Modifier = Modifier,
     val selectedCountry = viewModel.selectedCountry.observeAsState().value
     val context = LocalContext.current
 
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getDefaultCountry(context = context)
+    }
+
     if (isCountryPickerDialogVisible) {
         CountryPickerDialog(
             countryList = countryList,
             onItemClick = { country ->
                 viewModel.setSelectedCountry(item = country)
                 viewModel.setCountryPickerDialogVisibility()
-                viewModel.resetCountry()
+                viewModel.resetCountryList()
             },
             onSearch = {
                 viewModel.searchCountry(searchQuery = it, context = context)},
             onDismiss = {
                 viewModel.setCountryPickerDialogVisibility()
-                viewModel.resetCountry()
+                viewModel.resetCountryList()
         })
     }
 

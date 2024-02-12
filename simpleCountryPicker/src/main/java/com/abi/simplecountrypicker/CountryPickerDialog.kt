@@ -1,5 +1,6 @@
 package com.abi.simplecountrypicker
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.abi.simplecountrypicker.data.CountryData
+import com.abi.simplecountrypicker.theme.SearchFieldBackgroundColor
 
 @Composable
 fun CountryPickerDialog(onDismiss : () -> Unit,
@@ -65,12 +67,15 @@ fun CountryPickerDialog(onDismiss : () -> Unit,
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun CountryListView(
     onDismiss : () -> Unit,
     onSearch : (String) -> Unit,
     onItemClick : (CountryData) -> Unit,
     countryList : List<CountryData>?) {
+
+    val groupedCountryName = countryList?.groupBy { it.countryIdentifier[0] }
 
     Column(modifier = Modifier
         .padding(vertical = 24.dp)
@@ -100,11 +105,23 @@ private fun CountryListView(
 
         )
 
-        LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
-            items(countryList ?: emptyList()) { item ->
-                CountryListSingleItemView(
-                    modifier = Modifier.clickable { onItemClick(item) },
-                    countryData = item)
+        LazyColumn(contentPadding = PaddingValues(bottom = 16.dp),
+            modifier = Modifier.padding(top = 16.dp)) {
+            groupedCountryName?.forEach { (firstLetter, groupedCountryList) ->
+                stickyHeader {
+                    Text(text = "${firstLetter.uppercaseChar()}",
+                        fontWeight = W600,
+                        modifier = Modifier
+                            .background(color = SearchFieldBackgroundColor)
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp))
+                }
+
+                items(groupedCountryList) { item ->
+                    CountryListSingleItemView(
+                        modifier = Modifier.clickable { onItemClick(item) },
+                        countryData = item)
+                }
             }
         }
     }

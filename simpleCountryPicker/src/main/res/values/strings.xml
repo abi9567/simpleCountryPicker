@@ -184,7 +184,7 @@
     <string name="guyana_hint" translatable="false">609 1234</string>
     <string name="haiti">Haiti</string>
     <string name="haiti_hint" translatable="false">34 10 1234</string>
-    <string name="holy_see">Holy See (vatican City State)</string>
+    <string name="vatican">Vatican City</string>
     <string name="honduras">Honduras</string>
     <string name="honduras_hint" translatable="false">9123-4567</string>
     <string name="hong_kong">Hong Kong</string>
@@ -362,7 +362,8 @@
     <string name="saint_martin_hint" translatable="false">690 00 12 34</string>
     <string name="saint_pierre">Saint Pierre And Miquelon</string>
     <string name="saint_pierre_hint" translatable="false">55 12 34</string>
-    <string name="saint_vincent"><![CDATA[Saint Vincent &amp; The Grenadines]]></string>
+    <string name="saint_vincent">Saint Vincent &amp; The Grenadines</string>
+    <string name="western_sahara">Western Sahara</string>
     <string name="saint_vincent_hint" translatable="false">784-430-1234</string>
     <string name="samoa">Samoa</string>
     <string name="samoa_hint" translatable="false">72 12345</string>
