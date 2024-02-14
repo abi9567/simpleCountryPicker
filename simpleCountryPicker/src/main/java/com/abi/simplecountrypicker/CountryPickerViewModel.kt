@@ -16,7 +16,7 @@ import com.abi.simplecountrypicker.utils.Utils
 
 class CountryPickerViewModel : ViewModel() {
 
-    private val _isCountryPickerDialogVisible = mutableStateOf(value = true)
+    private val _isCountryPickerDialogVisible = mutableStateOf(value = false)
     val isCountryPickerDialogVisible : State<Boolean> = _isCountryPickerDialogVisible
 
     private val fullCountryList = Utils.countryList
