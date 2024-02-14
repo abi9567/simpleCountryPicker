@@ -77,11 +77,9 @@ dependencies {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.abi9567"
+            groupId = "com.github.abi9567"
             artifactId = "simpleCountryPicker"
             version = "1.0"
-
-            println("Components -> ${ components.size }")
 
             afterEvaluate {
                 from(components["release"])
