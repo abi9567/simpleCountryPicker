@@ -50,7 +50,7 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.github.abi9567"
-            artifactId = "simple-country-picker"
+            artifactId = "simpleCountryPicker"
             version = "1.0.0"
 //            artifact("${layout.buildDirectory}/outputs/aar/${artifactId}-release.aar")
 
