@@ -21,12 +21,6 @@ android {
         }
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
