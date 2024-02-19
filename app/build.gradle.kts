@@ -73,34 +73,3 @@ dependencies {
     implementation(project(":simpleCountryPicker"))
     androidTestImplementation("junit:junit:4.12")
 }
-
-
-//publishing {
-//    publications {
-//        register<MavenPublication>("release") {
-//            groupId = "com.github.abi9567"
-//            artifactId = "simpleCountryPicker"
-//            version = "1.0"
-//            artifact("${layout.buildDirectory}/outputs/aar/${artifactId}-release.aar")
-//
-//            afterEvaluate {
-//                from(components["release"])
-//            }
-//        }
-//    }
-//
-//    repositories {
-//        maven {
-//            name = "SimpleCountryPicker"
-//            /** Configure path of your package repository on Github
-//             *  Replace GITHUB_USERID with your/organisation Github userID and REPOSITORY with the repository name on GitHub
-//             */
-//            url = uri("https://maven.pkg.github.com/GITHUB_USERID/REPOSITORY") // Github Package
-//            credentials {
-//                //Fetch these details from the properties file or from Environment variables
-////                username = githubProperties.get("gpr.usrr") as String? ?: System.getenv("GPR_USER")
-////                password = githubProperties.get("gpr.kery") as String? ?: System.getenv("GPR_API_KEY")
-//            }
-//        }
-//    }
-//}

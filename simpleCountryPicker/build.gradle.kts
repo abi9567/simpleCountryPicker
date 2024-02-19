@@ -40,6 +40,21 @@ android {
     }
 }
 
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.abi9567"
+            artifactId = "simpleCountryPicker"
+            version = "1.0"
+            artifact("${layout.buildDirectory}/outputs/aar/${artifactId}-release.aar")
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -58,19 +73,4 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.material3)
-
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
-                groupId = "com.github.abi9567"
-                artifactId = "simpleCountryPicker"
-                version = "1.0"
-                artifact("${layout.buildDirectory}/outputs/aar/${artifactId}-release.aar")
-
-                afterEvaluate {
-                    from(components["release"])
-                }
-            }
-        }
-    }
 }
