@@ -1,5 +1,6 @@
 package com.abi.simplecountrypicker
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -22,8 +23,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
+/**
+* @param defaultCountryIdentifier for set initial country code and flag visible in the composable view. If not specifier the default country code shown will be India.
+ * for full list of available [defaultCountryIdentifier]
+ * check here country_code_identifiers.md in the git repo.
+* @param isCountryCodeVisible set true or false for country code visibility in the composable view. The default value is true.
+* @param isCountryFlagVisible set true or false for country flag visibility in the composable view. The default value is true.
+* @param isEnabled set true for this view clickable. set false for not clickable. The default value is true.
+* @param trailingIconComposable you can also change trailing icon by using this parameter - default it's null. If specify [trailingIconComposable] the default down arrow icon will not be visible, and this [trailingIconComposable] will be shown
+*/
+
 @Composable
 fun SimpleCountryPicker(modifier : Modifier = Modifier,
+                        defaultCountryIdentifier : String = "in",
+                        isCountryCodeVisible : Boolean = true,
+                        isCountryFlagVisible : Boolean = true,
+                        isEnabled : Boolean = true,
+                        trailingIconComposable : (@Composable () -> Unit)? = null,
                         viewModel : CountryPickerViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
 
@@ -33,7 +49,7 @@ fun SimpleCountryPicker(modifier : Modifier = Modifier,
     val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.getDefaultCountry(context = context)
+        viewModel.setInitialCountry(countryIdentifier = defaultCountryIdentifier)
     }
 
     if (isCountryPickerDialogVisible) {
@@ -56,15 +72,21 @@ fun SimpleCountryPicker(modifier : Modifier = Modifier,
         .wrapContentSize()
         .padding(horizontal = 8.dp, vertical = 4.dp)
         .clip(shape = RoundedCornerShape(size = 4.dp))
-        .clickable { viewModel.setCountryPickerDialogVisibility() },
+        .clickable(enabled = isEnabled, onClick = { viewModel.setCountryPickerDialogVisibility() }),
         verticalAlignment = Alignment.CenterVertically) {
 
-        Image(painter = painterResource(id = selectedCountry?.countryIcon ?: 0),
-            contentDescription = null)
-        Spacer(modifier = Modifier.width(width = 8.dp))
-        Text(text = selectedCountry?.countryCode ?: "")
-        Spacer(modifier = Modifier.width(width = 4.dp))
-        Icon(imageVector = Icons.Default.ArrowDropDown,
-            contentDescription = null)
+        if (isCountryFlagVisible) {
+            Image(painter = painterResource(id = selectedCountry?.countryIcon ?: 0),
+                contentDescription = null)
+            Spacer(modifier = Modifier.width(width = 8.dp))
+        }
+
+        if (isCountryCodeVisible) {
+            Text(text = selectedCountry?.countryCode ?: "")
+            Spacer(modifier = Modifier.width(width = 4.dp))
+        }
+
+        if (trailingIconComposable != null) { trailingIconComposable() }
+        else { Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null) }
     }
 }
