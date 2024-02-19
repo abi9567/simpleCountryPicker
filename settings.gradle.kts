@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Simple Country Picker"
 include(":app")
-include(":simpleCountryPicker")
+include(":simple-country-picker")
