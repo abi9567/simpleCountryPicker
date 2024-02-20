@@ -24,7 +24,8 @@ dependencyResolutionManagement {
 ````
 
 ## Screenshots
-[Bottom sheet view](https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png)
+[Bottom sheet view]
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png">
 
 [Dialog View](https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png)
 
