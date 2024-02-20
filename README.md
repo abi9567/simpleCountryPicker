@@ -29,10 +29,10 @@ dependencyResolutionManagement {
 <img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png" width = "340" height = "720">
 
 ### Country Code and Icon View
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png" width = "350" height = "820">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png" width = "340" height = "720">
 
 ### Bottom sheet view
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "720" height = "1084">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "340" height = "720">
 
 ## Parameters Used for Customization
 
