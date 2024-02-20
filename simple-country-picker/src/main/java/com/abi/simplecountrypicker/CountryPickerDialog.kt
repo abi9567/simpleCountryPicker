@@ -26,6 +26,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,55 +41,83 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight.Companion.W600
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.abi.simplecountrypicker.data.CountryData
-import com.abi.simplecountrypicker.theme.SearchFieldBackgroundColor
 
 @Composable
-fun CountryPickerDialog(onDismiss : () -> Unit,
-                        onItemClick : (CountryData) -> Unit,
-                        countryList : List<CountryData>?,
-                        onSearch: (String) -> Unit,
-                        dialogProperties: DialogProperties = DialogProperties()
+internal fun CountryPickerDialog(
+    onDismiss: () -> Unit,
+    title: String,
+    onItemClick: (CountryData) -> Unit,
+    countryList: List<CountryData>?,
+    onSearch: (String) -> Unit,
+    backgroundColor: Color,
+    stickyHeaderBackgroundColor: Color,
+    dividerColor: Color,
+    textColor: Color,
+    outlinedTextFieldDefaults: TextFieldColors,
+    dialogProperties: DialogProperties = DialogProperties()
 ) {
 
-    Dialog(onDismissRequest = onDismiss,
+    Dialog(
+        onDismissRequest = onDismiss,
         properties = dialogProperties
     ) {
-        CountryListView(onDismiss = onDismiss,
-            onItemClick =  onItemClick,
+        CountryListView(
+            onDismiss = onDismiss,
+            title = title,
+            onItemClick = onItemClick,
             onSearch = onSearch,
-            countryList = countryList)
+            backgroundColor = backgroundColor,
+            stickyHeaderBackgroundColor = stickyHeaderBackgroundColor,
+            outlinedTextFieldDefaults = outlinedTextFieldDefaults,
+            dividerColor = dividerColor,
+            textColor = textColor,
+            countryList = countryList
+        )
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun CountryListView(
-    onDismiss : () -> Unit,
-    onSearch : (String) -> Unit,
-    onItemClick : (CountryData) -> Unit,
-    countryList : List<CountryData>?) {
+internal fun CountryListView(
+    title: String,
+    onDismiss: () -> Unit,
+    onSearch: (String) -> Unit,
+    verticalPadding: Dp = 24.dp,
+    onItemClick: (CountryData) -> Unit,
+    backgroundColor: Color,
+    stickyHeaderBackgroundColor: Color,
+    dividerColor: Color,
+    textColor: Color,
+    outlinedTextFieldDefaults: TextFieldColors,
+    countryList: List<CountryData>?
+) {
 
     val groupedCountryName = countryList?.groupBy { it.countryIdentifier[0] }
 
-    Column(modifier = Modifier
-        .padding(vertical = 24.dp)
-        .background(
-            color = Color.White,
-            shape = RoundedCornerShape(size = 16.dp)
-        )
-        .fillMaxSize())
+    Column(
+        modifier = Modifier
+            .padding(vertical = verticalPadding)
+            .background(
+                color = backgroundColor,
+                shape = RoundedCornerShape(size = 16.dp)
+            )
+            .fillMaxSize()
+    )
     {
 
-        Row(modifier = Modifier
-            .padding(start = 16.dp)
-            .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Select Country", fontSize = 16.sp, fontWeight = W600)
+        Row(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = title, fontSize = 16.sp, fontWeight = W600, color = textColor)
             Spacer(modifier = Modifier.weight(weight = 1F))
             IconButton(onClick = onDismiss) {
                 Icon(imageVector = Icons.Default.Close, contentDescription = null)
@@ -99,26 +128,34 @@ private fun CountryListView(
 
         CustomSearchTextField(
             modifier = Modifier.padding(horizontal = 16.dp),
-            onValueChange = onSearch
-
+            onValueChange = onSearch,
+            outlinedTextFieldDefaults = outlinedTextFieldDefaults
         )
 
-        LazyColumn(contentPadding = PaddingValues(bottom = 16.dp),
-            modifier = Modifier.padding(top = 16.dp)) {
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = 16.dp),
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
             groupedCountryName?.forEach { (firstLetter, groupedCountryList) ->
                 stickyHeader {
-                    Text(text = "${firstLetter.uppercaseChar()}",
+                    Text(
+                        text = "${firstLetter.uppercaseChar()}",
                         fontWeight = W600,
                         modifier = Modifier
-                            .background(color = SearchFieldBackgroundColor)
+                            .background(color = stickyHeaderBackgroundColor)
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp))
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
                 }
 
                 items(groupedCountryList) { item ->
                     CountryListSingleItemView(
                         modifier = Modifier.clickable { onItemClick(item) },
-                        countryData = item)
+                        dividerColor = dividerColor,
+                        isDividerVisible = groupedCountryList.last() != item,
+                        textColor = textColor,
+                        countryData = item
+                    )
                 }
             }
         }
@@ -126,18 +163,26 @@ private fun CountryListView(
 }
 
 @Composable
-private fun CountryListSingleItemView(modifier: Modifier = Modifier,
-                                      countryData: CountryData
+private fun CountryListSingleItemView(
+    modifier: Modifier = Modifier,
+    dividerColor: Color,
+    textColor: Color,
+    isDividerVisible: Boolean,
+    countryData: CountryData
 ) {
 
-    Column(modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.Center) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center
+    ) {
 
-        Row(modifier = Modifier
-            .height(intrinsicSize = IntrinsicSize.Max)
-            .padding(vertical = 13.dp, horizontal = 16.dp)
-            .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier
+                .height(intrinsicSize = IntrinsicSize.Max)
+                .padding(vertical = 13.dp, horizontal = 16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
             Image(
                 painter = painterResource(id = countryData.countryIcon),
@@ -155,23 +200,36 @@ private fun CountryListSingleItemView(modifier: Modifier = Modifier,
             VerticalDivider(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .width(width = 0.9.dp)
+                    .width(width = 0.9.dp),
+                color = dividerColor
             )
 
             Spacer(modifier = Modifier.width(width = 8.dp))
 
-            Text(text = buildAnnotatedString {
+            Text(
+                text = buildAnnotatedString {
 
-                withStyle(style = SpanStyle(fontSize = 14.sp,
-                    fontWeight = W600)) {
-                    append(text = "(${ countryData.countryCode })  ") }
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = 14.sp,
+                            fontWeight = W600
+                        )
+                    ) {
+                        append(text = "(${countryData.countryCode})  ")
+                    }
 
-                withStyle(style = SpanStyle(fontSize = 14.sp)) {
-                    append(text = stringResource(id = countryData.countryName)) }
+                    withStyle(style = SpanStyle(fontSize = 14.sp)) {
+                        append(text = stringResource(id = countryData.countryName))
+                    }
 
-            }, maxLines = 2,
-                overflow = TextOverflow.Ellipsis)
+                }, maxLines = 2,
+                color = textColor,
+                overflow = TextOverflow.Ellipsis
+            )
         }
-        HorizontalDivider(thickness = 0.65.dp)
+
+        if (isDividerVisible) {
+            HorizontalDivider(thickness = 0.65.dp, color = dividerColor)
+        }
     }
 }

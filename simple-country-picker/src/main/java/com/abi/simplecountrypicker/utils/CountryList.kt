@@ -3,8 +3,8 @@ package com.abi.simplecountrypicker.utils
 import com.abi.simplecountrypicker.R
 import com.abi.simplecountrypicker.data.CountryData
 
-object Utils {
-    var countryList : List<CountryData> = mutableListOf(
+internal object Utils {
+    var countryList: List<CountryData> = mutableListOf(
         CountryData("af", "+93", R.drawable.af, R.string.afghanistan),
         CountryData("al", "+355", R.drawable.al, R.string.albania),
         CountryData("alg", "+213", R.drawable.dz, R.string.algeria),
