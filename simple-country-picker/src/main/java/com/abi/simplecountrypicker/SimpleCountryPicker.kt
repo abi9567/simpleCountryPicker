@@ -25,7 +25,7 @@ import com.abi.simplecountrypicker.theme.SearchFieldBackgroundColor
  * @param backgroundColor background color of the dialog. Default [backgroundColor] is White.
  * @param textColor textColor of the country name & country code in the dialog. Default [textColor] is Black.
  * @param countryCodeTextColorAndIconColor color of the country code & dropdown icon. Default [textColor] is Black.
- * @param stickyHeaderBackgroundColor background color of the dialog. Default [backgroundColor] is White.
+ * @param stickyHeaderBackgroundColor background color of the sticky header. Default [backgroundColor] is White.
  * @param dividerColor used for the divider color of dialog. It's default value is [DividerDefaults.color]
  * @param searchFieldColors is used for change the outlined search field colors it's type is [TextFieldColors] you can use [OutlinedTextFieldDefaults.colors] property to customize it's colors.
  */
