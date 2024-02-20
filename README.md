@@ -25,7 +25,7 @@ dependencyResolutionManagement {
 
 ## Screenshots
 [Bottom sheet view]
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "120" height = "240">
 
 [Dialog View](https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png)
 
