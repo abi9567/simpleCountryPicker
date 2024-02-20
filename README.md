@@ -26,13 +26,13 @@ dependencyResolutionManagement {
 ## Screenshots
 
 ### Dialog View
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png" width = "340" height = "720">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png" width = "340" height = "680">
 
 ### Country Code and Icon View
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png" width = "340" height = "720">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png" width = "340" height = "680">
 
 ### Bottom sheet view
-<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "340" height = "720">
+<img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "340" height = "680">
 
 ## Parameters Used for Customization
 
