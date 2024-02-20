@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/abi9567/simpleCountryPicker.svg)](https://jitpack.io/#abi9567/simpleCountryPicker)
+
 
 ## Usage
 
