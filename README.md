@@ -23,6 +23,16 @@ dependencyResolutionManagement {
 	}
 ````
 
+## Screenshots
+## Bottom sheet view
+https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png
+
+## Dialog View
+https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png
+
+## Country Code and Icon View
+https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png
+
 ## Parameters Used for Customization
 
 | Parameter                        | Description                                                                                                                                                                                                                                                                                                               |
