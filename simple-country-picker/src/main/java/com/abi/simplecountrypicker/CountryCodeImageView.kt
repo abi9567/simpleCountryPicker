@@ -27,7 +27,7 @@ internal fun CountryCodeImageView(
     modifier: Modifier,
     isEnabled: Boolean,
     isCircleShapeFlag: Boolean,
-    viewModel: CountryPickerViewModel,
+    onItemClick : () -> Unit,
     isCountryFlagVisible: Boolean,
     selectedCountry: CountryData?,
     isCountryCodeVisible: Boolean,
@@ -40,10 +40,7 @@ internal fun CountryCodeImageView(
             .wrapContentSize()
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .clip(shape = RoundedCornerShape(size = 4.dp))
-            .clickable(enabled = isEnabled,
-                onClick = {
-                    viewModel.setBottomSheetVisibility()
-                }),
+            .clickable(enabled = isEnabled, onClick = onItemClick),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -59,16 +56,14 @@ internal fun CountryCodeImageView(
                         ),
                     contentDescription = null
                 )
-                Spacer(modifier = Modifier.width(width = 8.dp))
             }
         }
 
         if (isCountryCodeVisible) {
-            Text(
-                text = selectedCountry?.countryCode ?: "",
-                color = countryCodeTextColorAndIconColor
-            )
-            Spacer(modifier = Modifier.width(width = 4.dp))
+            Spacer(modifier = Modifier.width(width = 8.dp))
+            Text(text = selectedCountry?.countryCode ?: "",
+                color = countryCodeTextColorAndIconColor)
+            Spacer(modifier = Modifier.width(width = 2.dp))
         }
 
         if (trailingIconComposable != null) {

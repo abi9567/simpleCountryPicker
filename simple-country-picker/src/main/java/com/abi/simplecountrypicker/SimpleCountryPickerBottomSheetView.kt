@@ -86,7 +86,7 @@ fun BottomSheetCountryPicker(
     CountryCodeImageView(
         modifier = modifier,
         isEnabled = isEnabled,
-        viewModel = viewModel,
+        onItemClick = { viewModel.setBottomSheetVisibility() },
         isCountryFlagVisible = isCountryFlagVisible,
         selectedCountry = selectedCountry,
         isCountryCodeVisible = isCountryCodeVisible,

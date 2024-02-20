@@ -93,7 +93,7 @@ fun DialogCountryPicker(
     CountryCodeImageView(
         modifier = modifier,
         isEnabled = isEnabled,
-        viewModel = viewModel,
+        onItemClick = { viewModel.setCountryPickerDialogVisibility() },
         isCountryFlagVisible = isCountryFlagVisible,
         selectedCountry = selectedCountry,
         isCountryCodeVisible = isCountryCodeVisible,
