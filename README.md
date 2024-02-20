@@ -12,6 +12,6 @@ dependencyResolutionManagement {
 ### Step 2. Add the dependency ###
 ```
  dependencies {
-	        implementation 'com.github.abi9567:simpleCountryPicker:Tag'
+	        implementation 'com.github.abi9567:simpleCountryPicker:1.0.2'
 	}
 ```
