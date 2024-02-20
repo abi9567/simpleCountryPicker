@@ -23,6 +23,35 @@ dependencyResolutionManagement {
 	}
 ````
 
+### Step 3. To use Dialog Country Picker View add the [DialogCountryPicker] Composable view as the leading Icon of the TextField or any composable
+
+````kotlin
+OutlinedTextField(value = textFieldValue,
+                    leadingIcon = {
+                        //Use this for Country Code Dialog Picker
+                        DialogCountryPicker(
+                            pickedCountry = {
+                                Log.d("PickedCountry", it.toString())
+                            },
+                            isCountryCodeVisible = false,
+                        )
+                    }, onValueChange = { textFieldValue = it })
+````
+
+or 
+
+To use Bottom Sheet Country Picker View add the [DialogCountryPicker] Composable view as the leading Icon of the TextField or any composable
+
+````kotlin
+OutlinedTextField(value = textFieldValue,
+                    leadingIcon = {
+                        //Use this for Country Code Bottom Sheet Picker
+                        BottomSheetCountryPicker(pickedCountry = {
+                            Log.d("PickedCountry2", it.toString())
+                        })
+                    }, onValueChange = { textFieldValue = it })
+````
+
 ## Screenshots
 
 ### Country Code and Icon View
