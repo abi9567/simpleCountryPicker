@@ -40,7 +40,7 @@ OutlinedTextField(value = textFieldValue,
 
 or 
 
-To use Bottom Sheet Country Picker View add the [DialogCountryPicker] Composable view as the leading Icon of the TextField or any composable
+### To use Bottom Sheet Country Picker View add the [DialogCountryPicker] Composable view as the leading Icon of the TextField or any composable
 
 ````kotlin
 OutlinedTextField(value = textFieldValue,
@@ -57,10 +57,10 @@ OutlinedTextField(value = textFieldValue,
 ### Country Code and Icon View
 <img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Countru%20Code%20Image%20View.png" width = "340" height = "680">
 
-### Dialog View
+### DialogCountryPicker View
 <img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Dialog%20View.png" width = "340" height = "680">
 
-### Bottom sheet view
+### BottomSheetCountryPicker view
 <img src="https://github.com/abi9567/simpleCountryPicker/blob/main/Bottom%20sheet%20view.png" width = "340" height = "680">
 
 ## Parameters Used for Customization
