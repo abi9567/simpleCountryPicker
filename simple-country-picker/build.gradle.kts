@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.abi.simplecountrypicker"
     compileSdk = 34
-    version = "1.0.0"
+    version = "1.0.2"
 
     defaultConfig {
         minSdk = 24
@@ -51,7 +51,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.abi9567"
             artifactId = "simpleCountryPicker"
-            version = "1.0.0"
+            version = "1.0.2"
 //            artifact("${layout.buildDirectory}/outputs/aar/${artifactId}-release.aar")
 
             afterEvaluate {
